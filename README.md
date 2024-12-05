@@ -21,7 +21,8 @@ Before you start, make sure you have the following installed:
      [Download .NET](https://dotnet.microsoft.com/download)
 
 2. **SQL Server** (or any database you are using)  
-   The backend connects to a SQL Server database. Make sure to set up a database and update the connection string accordingly. Moreover, make sure these two nutget packages also installed
+   The backend connects to a SQL Server database. Make sure to set up a database and update the connection string accordingly. if you there is still problem, delete migrations, and install again magrations
+   Moreover, make sure these two nutget packages also installed
     Microsoft.EntityFrameworkCore.SqlServer
     Microsoft.EntityFrameworkCore.Tools
    
