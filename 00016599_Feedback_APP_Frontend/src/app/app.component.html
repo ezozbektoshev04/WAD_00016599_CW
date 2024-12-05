@@ -1,0 +1,92 @@
+<!-- //00016599 -->
+<div class="container">
+  <div class="feedback-container">
+    <div>
+      <form
+        (ngSubmit)="onFormSubmit()"
+        [formGroup]="feedbacksForm"
+        class="feedback-form"
+      >
+        <h1>Feedbacks</h1>
+        <div class="form-group">
+          <label for="feedbackTitle">Feedback Title</label>
+          <input
+            type="text"
+            formControlName="feedbackTitle"
+            class="form-control"
+            id="feedbackTitle"
+          />
+        </div>
+        <div class="form-group">
+          <label for="feedbackDescription">Feedback Description</label>
+          <input
+            type="text"
+            formControlName="feedbackDescription"
+            id="feedbackDescription"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userId">User Name</label>
+          <select formControlName="userId" id="userId" class="form-control">
+            @if(user$ | async; as users){ @if(users.length>0){ @for(user of
+            users; track $index){
+            <option [value]="user.userId">
+              {{ user.userName }}
+            </option>
+            } } }
+          </select>
+        </div>
+        <div class="form-group">
+          <!-- <button type="submit" class="submit-btn">Add Feedback</button> -->
+          <button type="submit" class="submit-btn">
+            {{
+              feedbacksForm.value.feedbackId
+                ? "Update Feedback"
+                : "Add Feedback"
+            }}
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="feedback-list">
+      <table class="feedback-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created Date</th>
+            <th>User Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        @if(feedback$ | async; as feedbacks) { @if(feedbacks.length>0) {
+        @for(feedback of feedbacks; track $index) {
+
+        <tbody>
+          <tr>
+            <td>{{ feedback.feedbackTitle }}</td>
+            <td>{{ feedback.feedbackDescription }}</td>
+            <td>{{ feedback.feedbackCreatedDate }}</td>
+            <td>{{ feedback.userName }}</td>
+            <td>
+              <button type="button" class="edit-btn" (click)="onEdit(feedback)">
+                Edit
+              </button>
+              <button
+                type="button"
+                class="delete-btn"
+                (click)="onDelete(feedback.feedbackId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        } } @else{
+        <p>No Feedbacks Found</p>
+        }}
+      </table>
+    </div>
+  </div>
+</div>
